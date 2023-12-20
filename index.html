@@ -45,8 +45,8 @@
         }
 
         p {
-            font-size: 18px; /* 优化字号 */
-            margin: 10px 0; /* 调整边距 */
+            font-size: 18px; /* 增大文本字号 */
+            margin: 10px 0; /* 调整文本的上下间距 */
             z-index: 1;
         }
 
@@ -54,44 +54,13 @@
             text-decoration: none;
             color: #007BFF;
             font-weight: bold;
-            font-size: 18px; /* 优化字号 */
-            margin: 10px 0; /* 调整边距 */
+            font-size: 20px; /* 增大链接字号 */
             z-index: 1;
-        }
-
-        /* 桌面端布局 */
-        @media (min-width: 768px) {
-            body {
-                display: flex;
-                justify-content: space-around;
-            }
-
-            h1, img {
-                width: 45%; /* 左右两栏各占45%宽度 */
-                margin: 0; /* 清除标题和预设图片的默认边距 */
-            }
-
-            h1 {
-                text-align: left; /* 左对齐 */
-            }
-
-            img {
-                max-width: none; /* 恢复图片最大宽度 */
-            }
-
-            p, a {
-                text-align: left; /* 左对齐 */
-                width: 45%; /* 左右两栏各占45%宽度 */
-            }
-
-            body:before {
-                border-radius: 0; /* 桌面端去除高斯模糊板圆角 */
-            }
         }
     </style>
 </head>
 <body>
-    <h1>欢迎来到尼克的娱乐室！</h1>
+    <h1><br>欢迎来到尼克的娱乐室！</h1>
     <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
     
     <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
