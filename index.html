@@ -146,6 +146,23 @@
 
         // 点击头像切换图片
         headImageElement.addEventListener("click", changeHeadImage);
+
+        // 禁用右键菜单和长按菜单
+        headImageElement.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+
+        headImageElement.addEventListener("touchstart", function (e) {
+            var now = new Date().getTime();
+            var delta = now - touchStart;
+            if (delta < 500) {
+                e.preventDefault();
+                changeHeadImage();
+            }
+            touchStart = now;
+        });
+
+        var touchStart = 0;
     </script>
 </body>
 </html>
