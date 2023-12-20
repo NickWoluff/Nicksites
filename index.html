@@ -142,8 +142,16 @@
         }
 
         // 添加长按事件监听器
-        headImageElement.addEventListener('contextmenu', function (event) {
+        headImageElement.addEventListener('touchstart', function (event) {
             event.preventDefault(); // 阻止默认上下文菜单
+            // 设置长按定时器，2秒后执行changeImage函数
+            longPressTimer = setTimeout(changeImage, 2000);
+        });
+
+        // 添加触摸结束事件监听器
+        headImageElement.addEventListener('touchend', function (event) {
+            // 清除长按定时器
+            clearTimeout(longPressTimer);
         });
 
         // 长按头像触发的函数
