@@ -94,7 +94,7 @@
     <h1><br>欢迎来到尼克的娱乐室！</h1>
     
     <!-- 使用JavaScript随机选择头像 -->
-    <img id="headImage" alt="head" onlongpress="changeImage()">
+    <img id="headImage" alt="head">
 
     <div>
         <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
@@ -140,6 +140,11 @@
             // 设置首次打开标志为 true
             localStorage.setItem('isFirstOpen', true);
         }
+
+        // 添加长按事件监听器
+        headImageElement.addEventListener('contextmenu', function (event) {
+            event.preventDefault(); // 阻止默认上下文菜单
+        });
 
         // 长按头像触发的函数
         function changeImage() {
