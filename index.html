@@ -15,7 +15,6 @@
             position: relative;
             z-index: -2; /* 背景图片置于最底层 */
         }
-
         body:before {
             content: "";
             position: absolute;
@@ -35,55 +34,21 @@
             max-width: 300px;
             margin-top: 20px;
             z-index: 1; /* 预设图片置于最顶层 */
-        }
-
-        h1 {
-            font-size: 28px;
-            margin-top: 10px;
-            color: #333; /* 调整标题颜色 */
-            z-index: 1;
-        }
-
-        p {
-            font-size: 18px; /* 增大文本字号 */
-            margin: 5px 0;
-            z-index: 1;
-        }
-
-        a {
-            text-decoration: none;
-            color: #007BFF;
-            font-weight: bold;
-            font-size: 18px; /* 增大链接字号 */
-            z-index: 1;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                display: flex;
-                justify-content: space-around;
-                align-items: center;
-                text-align: left;
-            }
-
-            img {
-                max-width: 40%; /* 左栏图片宽度调整 */
-                margin-top: 0;
-            }
-
-            div {
-                max-width: 50%; /* 右栏宽度调整 */
-            }
+            position: absolute;
+            top: 0; /* 初始出现在屏幕正上方 */
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: grab; /* 鼠标形状 */
         }
 
         .copyright {
-            font-size: 10px; /* 增加版权信息字号 */
-            color: #666; /* 灰色字体颜色 */
-            position: absolute;
+            position: fixed;
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 2; /* 版权信息置于最顶层 */
+            font-size: 12px;
+            color: #666;
+            z-index: 2; /* 版权信息置于 z-index: 2 层 */
         }
     </style>
 </head>
@@ -92,11 +57,12 @@
 
     <h1><br>欢迎来到尼克的娱乐室！</h1>
     
-    <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
+    <img id="floatingImage" src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
 
     <div>
         <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
         <p><a href="https://space.bilibili.com/402433754" target="_blank">b站也不错！</a></p>
+        <br> <!-- 新增一行空白 -->
         <p><a href="https://twitter.com/Nick_Woluff" target="_blank">这里还有我的Twitter！</a></p>
     </div>
 
@@ -110,8 +76,54 @@
 ⠀⠀⠀⠀⠈⠙⠋⠁
     </pre>
 
-    <div class="copyright">
-        Copyright © 2023 Nick Woluff, All Rights Reserved
-    </div>
+    <div class="copyright">Copyright © 2023 Nick Woluff, All Rights Reserved</div>
+
+    <script>
+        const floatingImage = document.getElementById('floatingImage');
+        let isDragging = false;
+
+        floatingImage.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            floatingImage.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            floatingImage.style.cursor = 'grab';
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                floatingImage.style.top = `${e.clientY}px`;
+                floatingImage.style.left = `${e.clientX}px`;
+            }
+        });
+
+        // 获取设备方向信息
+        window.addEventListener('deviceorientation', (event) => {
+            const acceleration = event.accelerationIncludingGravity;
+
+            // 如果能够获取到设备方向，则使用陀螺仪信息掉落
+            if (acceleration) {
+                const offsetY = parseFloat(floatingImage.style.top) || 0;
+                const offsetX = parseFloat(floatingImage.style.left) || 0;
+
+                const speedY = acceleration.y * 0.1; // 调整速度
+                const speedX = acceleration.x * 0.1;
+
+                floatingImage.style.top = `${offsetY + speedY}px`;
+                floatingImage.style.left = `${offsetX + speedX}px`;
+
+                // 处理碰到屏幕边缘的情况
+                if (offsetY <= 0 || offsetY >= window.innerHeight - floatingImage.clientHeight) {
+                    floatingImage.style.top = `${offsetY - 0.5 * speedY}px`;
+                }
+
+                if (offsetX <= 0 || offsetX >= window.innerWidth - floatingImage.clientWidth) {
+                    floatingImage.style.left = `${offsetX - 0.5 * speedX}px`;
+                }
+            }
+        });
+    </script>
 </body>
 </html>
