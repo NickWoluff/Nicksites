@@ -15,6 +15,7 @@
             position: relative;
             z-index: -2; /* 背景图片置于最底层 */
         }
+
         body:before {
             content: "";
             position: absolute;
@@ -34,11 +35,27 @@
             max-width: 300px;
             margin-top: 20px;
             z-index: 1; /* 预设图片置于最顶层 */
-            position: absolute;
-            top: 0; /* 初始出现在屏幕正上方 */
-            left: 50%;
-            transform: translateX(-50%);
-            cursor: grab; /* 鼠标形状 */
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-top: 10px;
+            color: #333; /* 调整标题颜色 */
+            z-index: 1;
+        }
+
+        p {
+            font-size: 18px; /* 增大文本字号 */
+            margin: 5px 0;
+            z-index: 1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            font-size: 18px; /* 增大链接字号 */
+            z-index: 1;
         }
 
         .copyright {
@@ -50,6 +67,32 @@
             color: #666;
             z-index: 2; /* 版权信息置于 z-index: 2 层 */
         }
+
+        .floating-widget {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3; /* 浮动小组件置于 z-index: 3 层 */
+        }
+
+        @media (min-width: 768px) {
+            body {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                text-align: left;
+            }
+
+            img {
+                max-width: 40%; /* 左栏图片宽度调整 */
+                margin-top: 0;
+            }
+
+            div {
+                max-width: 50%; /* 右栏宽度调整 */
+            }
+        }
     </style>
 </head>
 <body>
@@ -57,7 +100,7 @@
 
     <h1><br>欢迎来到尼克的娱乐室！</h1>
     
-    <img id="floatingImage" src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
+    <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
 
     <div>
         <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
@@ -78,52 +121,83 @@
 
     <div class="copyright">Copyright © 2023 Nick Woluff, All Rights Reserved</div>
 
+    <!-- 浮动小组件图片 -->
+    <img class="floating-widget" src="YOUR_FLOATING_WIDGET_IMAGE_URL" alt="Floating Widget">
+    
+    <!-- JavaScript 代码 -->
     <script>
-        const floatingImage = document.getElementById('floatingImage');
-        let isDragging = false;
+        // JavaScript 代码将在这里添加
+        <!-- JavaScript 代码 -->
+<script>
+    // 获取浮动小组件元素
+    var floatingWidget = document.querySelector('.floating-widget');
 
-        floatingImage.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            floatingImage.style.cursor = 'grabbing';
-        });
+    // 初始位置和速度
+    var position = { x: window.innerWidth / 2, y: 0 };
+    var velocity = { x: 0, y: 5 };
 
-        document.addEventListener('mouseup', () => {
-            isDragging = false;
-            floatingImage.style.cursor = 'grab';
-        });
+    // 添加事件监听器以响应陀螺仪方向
+    window.addEventListener('deviceorientation', handleOrientation);
 
-        document.addEventListener('mousemove', (e) => {
-            if (isDragging) {
-                floatingImage.style.top = `${e.clientY}px`;
-                floatingImage.style.left = `${e.clientX}px`;
-            }
-        });
+    // 添加事件监听器以响应鼠标/触摸拖动
+    floatingWidget.addEventListener('mousedown', startDrag);
+    window.addEventListener('mousemove', drag);
+    window.addEventListener('mouseup', stopDrag);
 
-        // 获取设备方向信息
-        window.addEventListener('deviceorientation', (event) => {
-            const acceleration = event.accelerationIncludingGravity;
+    floatingWidget.addEventListener('touchstart', startDrag);
+    window.addEventListener('touchmove', drag);
+    window.addEventListener('touchend', stopDrag);
 
-            // 如果能够获取到设备方向，则使用陀螺仪信息掉落
-            if (acceleration) {
-                const offsetY = parseFloat(floatingImage.style.top) || 0;
-                const offsetX = parseFloat(floatingImage.style.left) || 0;
+    // 定义处理陀螺仪方向的函数
+    function handleOrientation(event) {
+        var beta = event.beta; // 在屏幕前后旋转的角度
 
-                const speedY = acceleration.y * 0.1; // 调整速度
-                const speedX = acceleration.x * 0.1;
+        // 计算新的速度
+        velocity.y = Math.cos((90 - beta) * (Math.PI / 180)) * 5;
 
-                floatingImage.style.top = `${offsetY + speedY}px`;
-                floatingImage.style.left = `${offsetX + speedX}px`;
+        // 更新位置
+        updatePosition();
+    }
 
-                // 处理碰到屏幕边缘的情况
-                if (offsetY <= 0 || offsetY >= window.innerHeight - floatingImage.clientHeight) {
-                    floatingImage.style.top = `${offsetY - 0.5 * speedY}px`;
-                }
+    // 定义启动拖动的函数
+    function startDrag(event) {
+        event.preventDefault();
+        velocity = { x: 0, y: 0 };
+    }
 
-                if (offsetX <= 0 || offsetX >= window.innerWidth - floatingImage.clientWidth) {
-                    floatingImage.style.left = `${offsetX - 0.5 * speedX}px`;
-                }
-            }
-        });
+    // 定义拖动的函数
+    function drag(event) {
+        event.preventDefault();
+        position.x = event.clientX || event.touches[0].clientX;
+        position.y = event.clientY || event.touches[0].clientY;
+        updatePosition();
+    }
+
+    // 定义停止拖动的函数
+    function stopDrag(event) {
+        event.preventDefault();
+        velocity = { x: 0, y: 5 }; // 恢复默认速度
+    }
+
+    // 定义更新位置的函数
+    function updatePosition() {
+        // 边缘碰撞检测
+        if (position.x < 0 || position.x > window.innerWidth) {
+            velocity.x *= -0.5; // 反向并损失50%速度
+        }
+
+        if (position.y < 0 || position.y > window.innerHeight) {
+            velocity.y *= -0.5; // 反向并损失50%速度
+        }
+
+        // 更新位置
+        position.x += velocity.x;
+        position.y += velocity.y;
+
+        // 设置浮动小组件的位置
+        floatingWidget.style.transform = `translate(${position.x}px, ${position.y}px)`;
+    }
+</script>
     </script>
 </body>
 </html>
