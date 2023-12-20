@@ -9,10 +9,19 @@
             text-align: center;
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-image: url('https://github.com/NickWoluff/Nicksites/blob/main/background.png?raw=true');
-            background-size: cover;
-            background-attachment: fixed;
-            background-color: rgba(255, 255, 255, 0.5); /* 50%透明度的白色背景 */
+            background: url('https://github.com/NickWoluff/Nicksites/blob/main/background.png?raw=true') center/cover fixed no-repeat;
+            position: relative;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5); /* 白色透明度50%背景 */
+            backdrop-filter: blur(10px); /* 高斯模糊 */
+            pointer-events: none; /* 确保点击事件透传到下层 */
         }
 
         img {
@@ -24,6 +33,7 @@
         h1 {
             font-size: 28px;
             margin-top: 10px;
+            color: #333; /* 调整标题颜色 */
         }
 
         p {
@@ -39,6 +49,7 @@
     </style>
 </head>
 <body>
+    <div class="overlay"></div>
     <h1>欢迎来到尼克的娱乐室！</h1>
     <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
     
