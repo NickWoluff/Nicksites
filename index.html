@@ -11,9 +11,17 @@
             text-align: center;
             font-family: Arial, sans-serif;
             margin: 20px;
-            background: url('https://github.com/NickWoluff/Nicksites/blob/main/background.png?raw=true') center/cover fixed no-repeat;
             position: relative;
-            z-index: -2;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://github.com/NickWoluff/Nicksites/blob/main/background.png?raw=true') center/cover fixed no-repeat;
+            z-index: -2; /* 背景图片置于最底层 */
         }
 
         body:before {
@@ -30,45 +38,60 @@
             z-index: -1; /* 高斯模糊板置于中间层 */
         }
 
+        .content-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1; /* 预设图片、文本和链接置于最顶层 */
+            position: relative;
+        }
+
+        .left-column,
+        .right-column {
+            flex: 1;
+        }
+
         img {
             width: 100%;
             max-width: 400px;
             margin-top: 20px;
-            z-index: 1;
         }
 
         h1 {
             font-size: 28px;
             margin-top: 10px;
             color: #333; /* 调整标题颜色 */
-            z-index: 1;
         }
 
         p {
-            font-size: 14px;
-            margin: 5px 0;
-            z-index: 1;
+            font-size: 18px; /* 调整字号为18px */
+            margin: 10px 0; /* 调整上下边距为10px */
         }
 
         a {
             text-decoration: none;
             color: #007BFF;
             font-weight: bold;
-            z-index: 1;
+            font-size: 18px; /* 调整字号为18px */
         }
     </style>
 </head>
 <body>
-    <h1><br>欢迎来到尼克的娱乐室！</h1>
-    <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
-    
-    <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
-    <p><a href="https://space.bilibili.com/402433754" target="_blank">b站也不错！</a></p>
-    <p><a href="https://twitter.com/Nick_Woluff" target="_blank">这里还有我的Twitter！</a></p>
+    <div class="background"></div>
 
-    <br><br>
+    <div class="content-container">
+        <div class="left-column">
+            <h1>欢迎来到尼克的娱乐室！</h1>
+            <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
+        </div>
+        <div class="right-column">
+            <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
+            <p><a href="https://space.bilibili.com/402433754" target="_blank">b站也不错！</a></p>
+            <p><a href="https://twitter.com/Nick_Woluff" target="_blank">这里还有我的Twitter！</a></p>
 
-    <pre>
+            <br><br>
+
+            <pre>
 ⠀⠀  ⠀⣀⡀
 ⢠⣤⡀⣾⣿⣿⠀⣤⣤⡄
 ⢿⣿⡇⠘⠛⠁⢸⣿⣿⠃ 
@@ -76,6 +99,8 @@
 ⣾⣿⣿⣿⣿⣿⣿⡀⠻⠟⠃
 ⠙⠛⠻⢿⣿⣿⣿⡇
 ⠀⠀⠀⠀⠈⠙⠋⠁
-    </pre>
+            </pre>
+        </div>
+    </div>
 </body>
 </html>
