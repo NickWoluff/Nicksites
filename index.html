@@ -11,17 +11,9 @@
             text-align: center;
             font-family: Arial, sans-serif;
             margin: 20px;
-            position: relative;
-        }
-
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             background: url('https://github.com/NickWoluff/Nicksites/blob/main/background.png?raw=true') center/cover fixed no-repeat;
-            z-index: -2; /* 背景图片置于最底层 */
+            position: relative;
+            z-index: -2;
         }
 
         body:before {
@@ -42,7 +34,7 @@
             width: 100%;
             max-width: 400px;
             margin-top: 20px;
-            z-index: 1; /* 预设图片置于最顶层 */
+            z-index: 1;
         }
 
         h1 {
@@ -53,8 +45,8 @@
         }
 
         p {
-            font-size: 16px; /* 调整文本字号 */
-            margin: 5px 0;
+            font-size: 18px; /* 优化字号 */
+            margin: 10px 0; /* 调整边距 */
             z-index: 1;
         }
 
@@ -62,45 +54,49 @@
             text-decoration: none;
             color: #007BFF;
             font-weight: bold;
-            font-size: 18px; /* 调整链接字号 */
+            font-size: 18px; /* 优化字号 */
+            margin: 10px 0; /* 调整边距 */
             z-index: 1;
         }
 
+        /* 桌面端布局 */
         @media (min-width: 768px) {
-            /* 当屏幕宽度大于等于768px时，添加样式 */
-            .container {
+            body {
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
+                justify-content: space-around;
             }
 
-            body:before {
-                width: 45%;
+            h1, img {
+                width: 45%; /* 左右两栏各占45%宽度 */
+                margin: 0; /* 清除标题和预设图片的默认边距 */
+            }
+
+            h1 {
+                text-align: left; /* 左对齐 */
             }
 
             img {
-                width: 45%;
-                max-width: none;
-                margin-top: 0;
+                max-width: none; /* 恢复图片最大宽度 */
             }
 
-            h1, p, a {
-                text-align: left;
+            p, a {
+                text-align: left; /* 左对齐 */
+                width: 45%; /* 左右两栏各占45%宽度 */
+            }
+
+            body:before {
+                border-radius: 0; /* 桌面端去除高斯模糊板圆角 */
             }
         }
     </style>
 </head>
 <body>
-    <div class="background"></div>
-    <div class="container">
-        <div class="left-content">
-            <h1>欢迎来到尼克的娱乐室！</h1>
-            <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
-            <p><a href="https://space.bilibili.com/402433754" target="_blank">b站也不错！</a></p>
-            <p><a href="https://twitter.com/Nick_Woluff" target="_blank">这里还有我的Twitter！</a></p>
-        </div>
-        <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
-    </div>
+    <h1>欢迎来到尼克的娱乐室！</h1>
+    <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
+    
+    <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
+    <p><a href="https://space.bilibili.com/402433754" target="_blank">b站也不错！</a></p>
+    <p><a href="https://twitter.com/Nick_Woluff" target="_blank">这里还有我的Twitter！</a></p>
 
     <br><br>
 
