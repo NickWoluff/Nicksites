@@ -35,7 +35,6 @@
             max-width: 300px;
             margin-top: 20px;
             z-index: 1; /* 预设图片置于最顶层 */
-            cursor: pointer; /* 添加指针样式 */
         }
 
         h1 {
@@ -119,50 +118,37 @@
     </div>
 
     <script>
-        // 存储头像URL数组
+        // 随机选择头像
         var headImages = [
             'https://www.z4a.net/images/2023/12/20/Image_1695958725098.png',
             'https://www.z4a.net/images/2023/12/21/1000036198.png',
             'https://www.z4a.net/images/2023/12/21/1000036197.png',
             'https://www.z4a.net/images/2023/12/21/1000036196.png'
         ];
+        var randomIndex = Math.floor(Math.random() * headImages.length);
+        var headImage = document.getElementById('headImage');
+        headImage.src = headImages[randomIndex];
 
-        // 获取头像元素
-        var headImageElement = document.getElementById('headImage');
+        // 处理长按事件
+        var pressTimer;
+        headImage.addEventListener('touchstart', function() {
+            pressTimer = window.setTimeout(function() {
+                // 在长按后随机更换头像
+                var newIndex;
+                do {
+                    newIndex = Math.floor(Math.random() * headImages.length);
+                } while (newIndex === randomIndex); // 确保新头像不同于之前的头像
+                headImage.src = headImages[newIndex];
 
-        // 获取首次打开标志
-        var isFirstOpen = localStorage.getItem('isFirstOpen');
-
-        // 如果是首次打开，则随机选择头像
-        if (!isFirstOpen) {
-            var randomIndex = Math.floor(Math.random() * headImages.length);
-            headImageElement.src = headImages[randomIndex];
-            // 设置首次打开标志为 true
-            localStorage.setItem('isFirstOpen', true);
-        }
-
-        // 添加长按事件监听器
-        headImageElement.addEventListener('touchstart', function (event) {
-            event.preventDefault(); // 阻止默认上下文菜单
-            // 设置长按定时器，2秒后执行changeImage函数
-            longPressTimer = setTimeout(changeImage, 2000);
+                // 触发手机短促震动
+                navigator.vibrate(200);
+            }, 2000); // 2秒为长按触发时间
         });
 
-        // 添加触摸结束事件监听器
-        headImageElement.addEventListener('touchend', function (event) {
-            // 清除长按定时器
-            clearTimeout(longPressTimer);
+        // 处理触摸结束事件
+        headImage.addEventListener('touchend', function() {
+            clearTimeout(pressTimer);
         });
-
-        // 长按头像触发的函数
-        function changeImage() {
-            // 随机选择新的头像
-            var randomIndex = Math.floor(Math.random() * headImages.length);
-            headImageElement.src = headImages[randomIndex];
-            
-            // 触发手机短促震动
-            navigator.vibrate(200);
-        }
     </script>
 </body>
 </html>
