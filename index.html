@@ -35,6 +35,11 @@
             max-width: 300px;
             margin-top: 20px;
             z-index: 1; /* 预设图片置于最顶层 */
+            transition: transform 0.3s ease-in-out; /* 添加过渡效果 */
+        }
+
+        img:hover {
+            transform: scale(1.1); /* 鼠标悬停时放大头像 */
         }
 
         h1 {
@@ -93,7 +98,7 @@
     <h1><br>欢迎来到尼克的娱乐室！</h1>
     
     <!-- 使用JavaScript随机选择头像 -->
-    <img id="headImage" alt="head">
+    <img id="headImage" alt="head" oncontextmenu="return false;" ontouchstart="startTimer()" ontouchend="clearTimer()">
 
     <div>
         <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
@@ -118,7 +123,6 @@
     </div>
 
     <script>
-        // 随机选择头像
         var headImages = [
             'https://www.z4a.net/images/2023/12/20/Image_1695958725098.png',
             'https://www.z4a.net/images/2023/12/21/1000036198.png',
@@ -126,7 +130,29 @@
             'https://www.z4a.net/images/2023/12/21/1000036196.png'
         ];
         var randomIndex = Math.floor(Math.random() * headImages.length);
-        document.getElementById('headImage').src = headImages[randomIndex];
+        var timer;
+
+        function startTimer() {
+            timer = setTimeout(function () {
+                changeHeadImage();
+                vibrate();
+            }, 2000); // 2 seconds
+        }
+
+        function clearTimer() {
+            clearTimeout(timer);
+        }
+
+        function changeHeadImage() {
+            randomIndex = (randomIndex + 1) % headImages.length;
+            document.getElementById('headImage').src = headImages[randomIndex];
+        }
+
+        function vibrate() {
+            if ('vibrate' in navigator) {
+                navigator.vibrate(200); // Vibrate for 200ms
+            }
+        }
     </script>
 </body>
 </html>
