@@ -35,6 +35,7 @@
             max-width: 300px;
             margin-top: 20px;
             z-index: 1; /* 预设图片置于最顶层 */
+            cursor: pointer; /* 添加指针样式 */
         }
 
         h1 {
@@ -93,7 +94,7 @@
     <h1><br>欢迎来到尼克的娱乐室！</h1>
     
     <!-- 使用JavaScript随机选择头像 -->
-    <img id="headImage" alt="head">
+    <img id="headImage" alt="head" onclick="changeHeadImage()">
 
     <div>
         <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
@@ -125,30 +126,16 @@
             'https://www.z4a.net/images/2023/12/21/1000036197.png',
             'https://www.z4a.net/images/2023/12/21/1000036196.png'
         ];
-        var randomIndex = Math.floor(Math.random() * headImages.length);
-        var headImage = document.getElementById('headImage');
-        headImage.src = headImages[randomIndex];
 
-        // 处理长按事件
-        var pressTimer;
-        headImage.addEventListener('touchstart', function() {
-            pressTimer = window.setTimeout(function() {
-                // 在长按后随机更换头像
-                var newIndex;
-                do {
-                    newIndex = Math.floor(Math.random() * headImages.length);
-                } while (newIndex === randomIndex); // 确保新头像不同于之前的头像
-                headImage.src = headImages[newIndex];
+        function changeHeadImage() {
+            var randomIndex = Math.floor(Math.random() * headImages.length);
+            document.getElementById('headImage').src = headImages[randomIndex];
 
-                // 触发手机短促震动
-                navigator.vibrate(200);
-            }, 2000); // 2秒为长按触发时间
-        });
-
-        // 处理触摸结束事件
-        headImage.addEventListener('touchend', function() {
-            clearTimeout(pressTimer);
-        });
+            // 触发手机短促震动
+            if ('vibrate' in navigator) {
+                navigator.vibrate(100);
+            }
+        }
     </script>
 </body>
 </html>
