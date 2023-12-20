@@ -10,10 +10,8 @@
         body {
             text-align: center;
             font-family: Arial, sans-serif;
-            margin: 0; /* 移除页面边距 */
-            padding: 0; /* 移除页面内边距 */
+            margin: 20px;
             position: relative;
-            z-index: -2;
         }
 
         .background {
@@ -55,7 +53,7 @@
         }
 
         p {
-            font-size: 16px; /* 优化文本字号 */
+            font-size: 16px; /* 调整文本字号 */
             margin: 5px 0;
             z-index: 1;
         }
@@ -64,41 +62,47 @@
             text-decoration: none;
             color: #007BFF;
             font-weight: bold;
-            font-size: 16px; /* 优化链接字号 */
+            font-size: 18px; /* 调整链接字号 */
             z-index: 1;
         }
 
         @media (min-width: 768px) {
-            body {
+            /* 当屏幕宽度大于等于768px时，添加样式 */
+            .container {
                 display: flex;
-                justify-content: space-around;
+                justify-content: space-between;
                 align-items: center;
-                text-align: left;
+            }
+
+            body:before {
+                width: 45%;
             }
 
             img {
-                max-width: 40%; /* 左栏图片宽度调整 */
+                width: 45%;
+                max-width: none;
                 margin-top: 0;
             }
 
-            div {
-                max-width: 50%; /* 右栏宽度调整 */
+            h1, p, a {
+                text-align: left;
             }
         }
     </style>
 </head>
 <body>
     <div class="background"></div>
-
-    <h1><br>欢迎来到尼克的娱乐室！</h1>
-    
-    <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
-
-    <div>
-        <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
-        <p><a href="https://space.bilibili.com/402433754" target="_blank">b站也不错！</a></p>
-        <p><a href="https://twitter.com/Nick_Woluff" target="_blank">这里还有我的Twitter！</a></p>
+    <div class="container">
+        <div class="left-content">
+            <h1>欢迎来到尼克的娱乐室！</h1>
+            <p><a href="http://weibo.com/u/7181243020" target="_blank">去尼克的微博看看？</a></p>
+            <p><a href="https://space.bilibili.com/402433754" target="_blank">b站也不错！</a></p>
+            <p><a href="https://twitter.com/Nick_Woluff" target="_blank">这里还有我的Twitter！</a></p>
+        </div>
+        <img src="https://github.com/NickWoluff/Nicksites/blob/main/head.png?raw=true" alt="预设图片">
     </div>
+
+    <br><br>
 
     <pre>
 ⠀⠀  ⠀⣀⡀
