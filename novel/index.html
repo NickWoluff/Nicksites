@@ -31,13 +31,6 @@
             z-index: -1; /* 高斯模糊板置于中间层 */
         }
 
-        img {
-            width: 30%; /* 缩小预设图片大小 */
-            max-width: 300px;
-            margin-top: 20px;
-            z-index: 1; /* 预设图片置于最顶层 */
-        }
-
         h1 {
             font-size: 28px;
             margin-top: 10px;
@@ -118,36 +111,7 @@
     </div>
 
     <script>
-        var headImages = [
-            "https://www.z4a.net/images/2023/12/20/Image_1695958725098.png",
-            "https://www.z4a.net/images/2023/12/21/1000036198.png",
-            "https://www.z4a.net/images/2023/12/21/1000036197.png",
-            "https://www.z4a.net/images/2023/12/21/1000036196.png"
-        ];
-
-        var headImageElement = document.getElementById("headImage");
-        var currentIndex = 0;
-
-        function changeHeadImage() {
-            var newIndex = currentIndex;
-            while (newIndex === currentIndex) {
-                newIndex = Math.floor(Math.random() * headImages.length);
-            }
-            currentIndex = newIndex;
-            headImageElement.src = headImages[currentIndex];
-            
-            // 触发震动效果
-            if ("vibrate" in navigator) {
-                navigator.vibrate(100);
-            }
-        }
-
-        // 初始展示随机图片
-        changeHeadImage();
-
-        // 点击头像切换图片
-        headImageElement.addEventListener("click", changeHeadImage);
-
+        
         // 禁用右键菜单和长按菜单
         headImageElement.addEventListener("contextmenu", function (e) {
             e.preventDefault();
