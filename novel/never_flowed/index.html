@@ -78,6 +78,16 @@
     h1, .novel-content {
         user-select: none;
     }
+
+    .copyright {
+        font-size: 10px; /* 增加版权信息字号 */
+        color: #666; /* 灰色字体颜色 */
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2; /* 版权信息置于最顶层 */
+    }
         
     </style>
 </head>
@@ -92,7 +102,20 @@
     <h1>「无孽自壅」</h1>
     <div class="table-of-contents"></div>
     <div class="novel-content"></div>
+    <pre>
+    ⣀⡀     
+⢠⣤⡀⣾⣿⣿⠀⣤⣤⡄ 
+⢿⣿⡇⠘⠛⠁⢸⣿⣿⠃ 
+⠈⣉⣤⣾⣿⣿⡆⠉⣴⣶⣶
+⣾⣿⣿⣿⣿⣿⣿⡀⠻⠟⠃
+⠙⠛⠻⢿⣿⣿⣿⡇    
+ ⠈⠙⠋⠁
+    </pre>
 
+    <div class="copyright">
+        Copyright © 2023-2024 Nick Woluff. All Rights Reserved.
+    </div>
+    
     <script>
         var novelText = `●「一」 惊梦
 
