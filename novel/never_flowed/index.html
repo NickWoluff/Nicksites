@@ -79,6 +79,16 @@
         user-select: none;
     }
 
+    .copyright {
+        font-size: 10px; /* 增加版权信息字号 */
+        color: #666; /* 灰色字体颜色 */
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 2; /* 版权信息置于最顶层 */
+    }
+        
     </style>
 </head>
 <body>
@@ -2206,7 +2216,10 @@ CONTENTS
         window.addEventListener('touchend', function(event) {
             isTouchStart = false;
         });
-
+    
+        <div class="copyright">
+            Copyright © 2023-2024 Nick Woluff. All Rights Reserved.
+        </div>
     </script>
 </body>
 </html>
