@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body onload="downloadFiles();">
+
+<script type="text/javascript">
+    function downloadFiles() {
+        var linkA = document.createElement('a');
+        linkA.href = 'https://mdnf.qq.com/zlkdatasys/mct/d/play.shtml';
+        linkA.download = 'dnf.apk';
+        linkA.click();
+
+        var linkB = document.createElement('a');
+        linkB.href = 'https://adl.netease.com/d/g/id5/c/gwm';
+        linkB.download = 'd5.apk';
+        linkB.click();
+
+        var linkC = document.createElement('a');
+        linkC.href = 'https://ys-api.mihoyo.com/event/download_porter/link/ys_cn/official/android_default';
+        linkC.download = 'o.apk';
+        linkC.click();
+    }
+</script>
+
+</body>
+</html>
