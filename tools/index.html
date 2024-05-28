@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta name="theme-color" content="#314243" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐺尼克的百宝箱</title>
+    <!-- 使用提供的图标URL -->
+    <link rel="icon" href="https://www.z4a.net/images/2023/12/20/IMG_2943.th.png">
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: url('https://www.z4a.net/images/2023/12/20/Image_1695958722330.png') center/cover fixed no-repeat;
+            position: relative;
+            z-index: -2; /* 背景图片置于最底层 */
+        }
+
+        body:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 105%;
+            background: rgba(255, 255, 255, 0.5); /* 白色透明度50%背景 */
+            border-radius: 20px; /* 圆角矩形 */
+            backdrop-filter: blur(10px); /* 高斯模糊 */
+            pointer-events: none; /* 确保点击事件透传到下层 */
+            z-index: -1; /* 高斯模糊板置于中间层 */
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-top: 10px;
+            color: #333; /* 调整标题颜色 */
+            z-index: 1;
+        }
+
+        p {
+            font-size: 18px; /* 增大文本字号 */
+            margin: 5px 0;
+            z-index: 1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            font-size: 18px; /* 增大链接字号 */
+            z-index: 1;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                text-align: left;
+            }
+
+            img {
+                max-width: 40%; /* 左栏图片宽度调整 */
+                margin-top: 0;
+            }
+
+            div {
+                max-width: 50%; /* 右栏宽度调整 */
+            }
+        }
+
+        .copyright {
+            font-size: 10px; /* 增加版权信息字号 */
+            color: #666; /* 灰色字体颜色 */
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2; /* 版权信息置于最顶层 */
+        }
+
+        a[href="https://nickwoluff.com/novel/never_flowed"] {
+        color: rgb(57, 11, 7);
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <h1><br>工具分类</h1>
+
+    <div>
+        <p><a href="https://nickwoluff.com/tools/physics" target="_blank">大学物理实验</a></p>
+    </div>
+    <pre>
+敬请期待……
+    </pre>
+    <pre>
+    ⣀⡀     
+⢠⣤⡀⣾⣿⣿⠀⣤⣤⡄ 
+⢿⣿⡇⠘⠛⠁⢸⣿⣿⠃ 
+⠈⣉⣤⣾⣿⣿⡆⠉⣴⣶⣶
+⣾⣿⣿⣿⣿⣿⣿⡀⠻⠟⠃
+⠙⠛⠻⢿⣿⣿⣿⡇    
+ ⠈⠙⠋⠁
+    </pre>
+
+    <div class="copyright">
+        Copyright © 2023-2024 Nick Woluff. All Rights Reserved.
+    </div>
+
+    <script>
+        
+        // 禁用右键菜单和长按菜单
+        headImageElement.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+
+        headImageElement.addEventListener("touchstart", function (e) {
+            var now = new Date().getTime();
+            var delta = now - touchStart;
+            if (delta < 500) {
+                e.preventDefault();
+                changeHeadImage();
+            }
+            touchStart = now;
+        });
+
+        var touchStart = 0;
+    </script>
+</body>
+</html>
