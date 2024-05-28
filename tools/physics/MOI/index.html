@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta name="theme-color" content="#314243" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>转动变量数据处理</title>
+    <!-- 使用提供的图标URL -->
+    <link rel="icon" href="https://www.z4a.net/images/2023/12/20/IMG_2943.th.png">
+    <style>
+        
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: url('https://www.z4a.net/images/2023/12/20/Image_1695958722330.png') center/cover fixed no-repeat;
+            position: relative;
+            z-index: -2; /* 背景图片置于最底层 */
+        }
+
+        body:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 105%;
+            background: rgba(255, 255, 255, 0.5); /* 白色透明度50%背景 */
+            border-radius: 20px; /* 圆角矩形 */
+            backdrop-filter: blur(10px); /* 高斯模糊 */
+            pointer-events: none; /* 确保点击事件透传到下层 */
+            z-index: -1; /* 高斯模糊板置于中间层 */
+        }
+
+        img {
+            width: 50%; /* 缩小预设图片大小 */
+            max-width: 300px;
+            margin-top: 20px;
+            z-index: 1; /* 预设图片置于最顶层 */
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-top: 10px;
+            color: #333; /* 调整标题颜色 */
+            z-index: 1;
+        }
+
+        p {
+            font-size: 18px; /* 增大文本字号 */
+            margin: 5px 0;
+            z-index: 1;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+            font-size: 18px; /* 增大链接字号 */
+            z-index: 1;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                text-align: left;
+            }
+
+            img {
+                max-width: 40%; /* 左栏图片宽度调整 */
+                margin-top: 0;
+            }
+
+            div {
+                max-width: 50%; /* 右栏宽度调整 */
+            }
+        }
+
+        .copyright {
+            font-size: 10px; /* 增加版权信息字号 */
+            color: #666; /* 灰色字体颜色 */
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2; /* 版权信息置于最顶层 */
+        }
+
+        /* 添加输入框样式 */
+        input[type="text"] {
+            background-color: transparent; /* 输入框背景色透明 */
+            color: #3b5c6f; /* 输入文字颜色 */
+            border-radius: 10px; /* 输入框圆角 */
+        }
+        
+        /* 修改所有文字颜色 */
+        body, h2, p, form {
+            color: #390b07;
+        }
+
+        /* 修改计算按钮样式 */
+        input[type="button"] {
+            border-radius: 10px; /* 按钮圆角 */
+            border: none; /* 边框透明 */
+            background-color: #09371da8;
+            color: #ffffff; /* 字体颜色 */
+            font-size: 18px; /* 字体大小 */
+            padding: 8px; /* 内边距 */
+        }
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <h2>输入时间数据：</h2>
+
+    <form id="myForm">
+        第一组时间数据: <br>
+        t1: <input type="text" id="time1_t1" name="time1_t1"><br>
+        t2: <input type="text" id="time1_t2" name="time1_t2"><br>
+        t3: <input type="text" id="time1_t3" name="time1_t3"><br>
+        t4: <input type="text" id="time1_t4" name="time1_t4"><br>
+        第二组时间数据: <br>
+        t1: <input type="text" id="time2_t1" name="time2_t1"><br>
+        t2: <input type="text" id="time2_t2" name="time2_t2"><br>
+        t3: <input type="text" id="time2_t3" name="time2_t3"><br>
+        t4: <input type="text" id="time2_t4" name="time2_t4"><br>
+        第三组时间数据: <br>
+        t1: <input type="text" id="time3_t1" name="time3_t1"><br>
+        t2: <input type="text" id="time3_t2" name="time3_t2"><br>
+        t3: <input type="text" id="time3_t3" name="time3_t3"><br>
+        t4: <input type="text" id="time3_t4" name="time3_t4"><br>
+        <br>
+        <input type="button" value="计算" onclick="calculate()">
+    </form>
+
+    <p id="result"></p>
+
+
+    <div class="copyright">
+        Copyright © 2023-2024 Nick Woluff. All Rights Reserved.
+    </div>
+
+    <script>
+const PI = 3.14;
+
+function calculateBeita(t1, t2, t3, t4) {
+    let Beita1 = 2 * PI * (t3 - 3*t1) / (Math.sqrt(t1) * t3 - Math.sqrt(t3) * t1);
+    let Beita2 = 2 * PI * (2*t4 - 4*t2) / (Math.sqrt(t2) * t4 - Math.sqrt(t4) * t2);
+    let AverBeita = (Beita1 + Beita2) / 2;
+    let result = [Beita1, Beita2, AverBeita];
+    return result;
+}
+
+function calculate() {
+    document.getElementById("result").innerHTML = ""; // 清空结果
+    let m = 0.0504, g = 9.8, R1 = 0.02, R2 = 0.025;
+    let Tim1 = [document.getElementById("time1_t1").value, document.getElementById("time1_t2").value, document.getElementById("time1_t3").value, document.getElementById("time1_t4").value];
+    let beita1 = calculateBeita(parseFloat(Tim1[0]), parseFloat(Tim1[1]), parseFloat(Tim1[2]), parseFloat(Tim1[3]));
+    document.getElementById("result").innerHTML += "第一组结果:<br>β1 = " + -beita1[0] + "<br>β2 = " + -beita1[1] + "<br>β = " + -beita1[2] + "<br>";
+    let Tim2 = [document.getElementById("time2_t1").value, document.getElementById("time2_t2").value, document.getElementById("time2_t3").value, document.getElementById("time2_t4").value];
+    let beita2 = calculateBeita(parseFloat(Tim2[0]), parseFloat(Tim2[1]), parseFloat(Tim2[2]), parseFloat(Tim2[3]));
+    document.getElementById("result").innerHTML += "第二组结果:<br>β1 = " + -beita2[0] + "<br>β2 = " + -beita2[1] + "<br>β = " + -beita2[2] + "<br>";
+    let J;
+    if (R2 != 0) {
+        let Tim3 = [document.getElementById("time3_t1").value, document.getElementById("time3_t2").value, document.getElementById("time3_t3").value, document.getElementById("time3_t4").value];
+        let beita3 = calculateBeita(parseFloat(Tim3[0]), parseFloat(Tim3[1]), parseFloat(Tim3[2]), parseFloat(Tim3[3]));
+        document.getElementById("result").innerHTML += "第三组结果:<br>β1 = " + -beita3[0] + "<br>β2 = " + -beita3[1] + "<br>β = " + -beita3[2] + "<br>";
+        let J1 = m * R1 * (g - R1 * beita2[2]) / (beita2[2] - beita1[2]);
+        let J2 = m * R2 * (g - R2 * beita3[2]) / (beita3[2] - beita1[2]);
+        J = (J1 + J2) / 2;
+        document.getElementById("result").innerHTML += "J1 = " + Math.abs(J1) + "<br>J2 = " + Math.abs(J2) + "<br>J = " + Math.abs(J) + "<br>";
+    } else {
+        J = m * R1 * (g - R1 * beita2[2]) / (beita2[2] - beita1[2]);
+        document.getElementById("result").innerHTML += "J = " + Math.abs(J) + "<br>";
+    }
+}
+    </script>
+</body>
+</html>
