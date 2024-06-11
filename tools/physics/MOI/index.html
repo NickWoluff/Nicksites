@@ -115,7 +115,7 @@
 
     <br><h2>转动惯量数据处理</h2>
     <pre>输入时间数据，点击“计算”，会自动计算β的值</pre>
-    <pre>"m=0.0504, g=9.8, R1=0.02, R2=0.025"</pre>
+    <pre>"m=0.05, g=9.8, R1=0.02, R2=0.025"</pre>
     <form id="myForm">
         第一组时间数据: <br>
         <pre>匀减速运动</pre>
@@ -159,7 +159,7 @@ function calculateBeita(t1, t2, t3, t4) {
 
 function calculate() {
     document.getElementById("result").innerHTML = ""; // 清空结果
-    let m = 0.0504, g = 9.8, R1 = 0.02, R2 = 0.025;
+    let m = 0.05, g = 9.8, R1 = 0.02, R2 = 0.025;
     let Tim1 = [document.getElementById("time1_t1").value, document.getElementById("time1_t2").value, document.getElementById("time1_t3").value, document.getElementById("time1_t4").value];
     let beita1 = calculateBeita(parseFloat(Tim1[0]), parseFloat(Tim1[1]), parseFloat(Tim1[2]), parseFloat(Tim1[3]));
     document.getElementById("result").innerHTML += "第一组结果:<br>β1 = " + -beita1[0] + "<br>β2 = " + -beita1[1] + "<br>β = " + -beita1[2] + "<br>";
